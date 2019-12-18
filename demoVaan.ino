@@ -25,14 +25,18 @@ bool buttonIsPressed(){
   return retVal;
 }
 
+void changeState(){
+  switch(valaistusTaso){
+    case LEDOFF:valaistusTaso=LEDON;break;  
+    case LEDON:valaistusTaso=TASO1;break;
+    case TASO1:valaistusTaso=TASO2;break;
+    case TASO2:valaistusTaso=LEDOFF;break;
+  }
+  analogWrite(LED, valaistusTaso);
+}
+
 void loop(){
   if(buttonIsPressed()){
-    switch(valaistusTaso){
-      case LEDOFF:valaistusTaso=LEDON;break;  
-      case LEDON:valaistusTaso=TASO1;break;
-      case TASO1:valaistusTaso=TASO2;break;
-      case TASO2:valaistusTaso=LEDOFF;break;
-    }
-    analogWrite(LED, valaistusTaso);
+    changeState();
   }
 }
