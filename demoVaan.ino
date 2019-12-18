@@ -1,11 +1,12 @@
 #define LED 6
 #define PAINIKE 5
-#define LEDON HIGH
-#define LEDOFF LOW
+#define LEDON 255
 #define TASO1 180
 #define TASO2 100
+#define LEDOFF 0
 #define FILTER 20
 int oldState;//Painikkeen tilojen seurantaa varten
+int valaistusTaso = LEDOFF;
 void setup(){
   pinMode(LED, OUTPUT);
   pinMode(PAINIKE, INPUT_PULLUP);
@@ -26,6 +27,12 @@ bool buttonIsPressed(){
 
 void loop(){
   if(buttonIsPressed()){
-    Serial.println("Jeps");
+    switch(valaistusTaso){
+      case LEDOFF:valaistusTaso=LEDON;break;  
+      case LEDON:valaistusTaso=TASO1;break;
+      case TASO1:valaistusTaso=TASO2;break;
+      case TASO2:valaistusTaso=LEDOFF;break;
+    }
+    analogWrite(LED, valaistusTaso);
   }
 }
