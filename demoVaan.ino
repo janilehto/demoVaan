@@ -6,10 +6,12 @@ void setup(){
   pinMode(PAINIKE, INPUT_PULLUP);
 }
 
+#define TASO1 180
+#define TASO2 100
 void loop(){
   if(digitalRead(PAINIKE)==LOW){
-    digitalWrite(LED, HIGH);  
+    analogWrite(LED, TASO2);  
   }else{
-    digitalWrite(LED, LOW);  
+    digitalWrite(LED, HIGH);  
   }
 }
